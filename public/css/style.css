@@ -6,6 +6,27 @@
  width: 50rem;
 }
 
+.card {
+    margin: 2rem;
+
+}
+
+.card-title {
+    font-size: 1.2rem;
+}
+
+.card-title:hover {
+    cursor: pointer;
+}
+
+.card-subtitle {
+    font-size: 1rem;
+}
+
+.card-text {
+    font-size: .8rem;
+}
+
 .separator {
     padding: 3%;
     font-size: 2rem;

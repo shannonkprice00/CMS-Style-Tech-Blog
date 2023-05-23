@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const { BlogPost, User } = require('../models');
+const withAuth = require('../utils/auth');
 
 // GET all blogposts for homepage
 router.get('/', async (req, res) => {
@@ -8,7 +9,9 @@ router.get('/', async (req, res) => {
       include: [
         {
           model: User,
-          attributes: ['username'],
+          attributes: {
+            exclude: ['password']
+          }
         },
       ],
     });
@@ -16,8 +19,6 @@ router.get('/', async (req, res) => {
     const blogPosts = dbBlogPostData.map((blogPost) =>
       blogPost.get({ plain: true })
     );
-
-    console.log(blogPosts);
 
     res.render('homepage', {
       blogPosts,
@@ -29,45 +30,32 @@ router.get('/', async (req, res) => {
   }
 });
 
-// // GET one gallery
-// router.get('/gallery/:id', async (req, res) => {
-//   // If the user is not logged in, redirect the user to the login page
-//   if (!req.session.loggedIn) {
-//     res.redirect('/login');
-//   } else {
-//     // If the user is logged in, allow them to view the gallery
-//     try {
-//       const dbGalleryData = await Gallery.findByPk(req.params.id, {
-//         include: [
-//           {
-//             model: Painting,
-//             attributes: [
-//               'id',
-//               'title',
-//               'artist',
-//               'exhibition_date',
-//               'filename',
-//               'description',
-//             ],
-//           },
-//         ],
-//       });
-//       const gallery = dbGalleryData.get({ plain: true });
-//       res.render('gallery', { gallery, loggedIn: req.session.loggedIn });
-//     } catch (err) {
-//       console.log(err);
-//       res.status(500).json(err);
-//     }
-//   }
-// });
+// GET one blog
+router.get('/blogpost/:id', withAuth, async (req, res) => {
+    try {
+      const dbBlogPostData = await BlogPost.findByPk(req.params.id, {
+        include: [
+          {
+            model: User,
+            attributes: {
+              exclude: ['password']
+            }
+          },
+        ],
+      });
+      const blogPost = dbBlogPostData.get({ plain: true });
+
+      console.log(blogPost);
+
+      res.render('blogpost', { blogPost, loggedIn: req.session.loggedIn });
+    } catch (err) {
+      console.log(err);
+      res.status(500).json(err);
+    }
+  });
 
 // // GET one painting
-// router.get('/painting/:id', async (req, res) => {
-//   // If the user is not logged in, redirect the user to the login page
-//   if (!req.session.loggedIn) {
-//     res.redirect('/login');
-//   } else {
-//     // If the user is logged in, allow them to view the painting
+// router.get('/painting/:id', withAuth async (req, res) => {
 //     try {
 //       const dbPaintingData = await Painting.findByPk(req.params.id);
 
