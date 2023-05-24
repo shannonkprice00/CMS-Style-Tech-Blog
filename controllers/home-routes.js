@@ -30,7 +30,7 @@ router.get("/", async (req, res) => {
   }
 });
 
-// GET one blog
+// GET one blogpost by ID
 router.get("/blogpost/:id", withAuth, async (req, res) => {
   try {
     const dbBlogPostData = await BlogPost.findByPk(req.params.id, {
@@ -56,6 +56,68 @@ router.get("/blogpost/:id", withAuth, async (req, res) => {
     res.status(500).json(err);
   }
 });
+
+router.get("/dashboard", withAuth, async (req, res) => {
+  try {
+    const userBlogPostData = await BlogPost.findAll({
+      where: {
+        user_id: req.session.user_id
+      },
+      include: {
+        model: User,
+        attributes: {
+          exclude: ['password']
+        }
+      }
+    });
+    const blogPosts = userBlogPostData.map((blogPost) =>
+    blogPost.get({ plain: true })
+  );
+    console.log(blogPosts);
+
+    res.render("dashboard", { blogPosts, loggedIn: req.session.loggedIn });
+
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+});
+
+router.get("/dashboard/addblogpost", withAuth, async (req, res) => {
+  const blogPostUserId = req.session.user_id;
+  res.render("addblogpost", { blogPostUserId, loggedIn: req.session.loggedIn });
+});
+
+router.post("/dashboard/addblogpost", withAuth, async (req, res) => {
+  try {
+    const newBlogPost = await BlogPost.create({
+      user_id: req.session.user_id,
+      title: req.body.title,
+      content: req.body.content,
+    });
+    const userBlogPostData = await BlogPost.findAll({
+      where: {
+        user_id: req.session.user_id
+      },
+      include: {
+        model: User,
+        attributes: {
+          exclude: ['password']
+        }
+      }
+    });
+    const blogPosts = userBlogPostData.map((blogPost) =>
+    blogPost.get({ plain: true })
+  );
+    console.log(blogPosts);
+
+    res.render("dashboard", { blogPosts, loggedIn: req.session.loggedIn });
+    
+   } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+   }
+  });
 
 router.get("/blogpost/:id/addcomment", withAuth, async (req, res) => {
   const blogPostId = req.params.id;
@@ -91,8 +153,6 @@ router.post("/blogpost/:id/addcomment", withAuth, async (req, res) => {
     });
 
     const blogPost = dbBlogPostData.get({ plain: true });
-
-    console.log(blogPost);
 
     res.render("blogpost", { blogPost, loggedIn: req.session.loggedIn });
   } catch (err) {
