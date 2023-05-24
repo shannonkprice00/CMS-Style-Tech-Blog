@@ -15,6 +15,8 @@
     font-size: 1.2rem;
 }
 
+/* figure out how to stop hover once clicked on */
+/* possibly add a tag before card-title class? */
 .card-title:hover {
     cursor: pointer;
 }
@@ -30,4 +32,8 @@
 .separator {
     padding: 3%;
     font-size: 2rem;
+}
+
+#add-comment {
+    padding: 1rem;
 }

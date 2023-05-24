@@ -1,17 +1,17 @@
-const router = require('express').Router();
-const { BlogPost, User } = require('../models');
-const withAuth = require('../utils/auth');
+const router = require("express").Router();
+const { BlogPost, User, Comment } = require("../models");
+const withAuth = require("../utils/auth");
 
 // GET all blogposts for homepage
-router.get('/', async (req, res) => {
+router.get("/", async (req, res) => {
   try {
     const dbBlogPostData = await BlogPost.findAll({
       include: [
         {
           model: User,
           attributes: {
-            exclude: ['password']
-          }
+            exclude: ["password"],
+          },
         },
       ],
     });
@@ -20,7 +20,7 @@ router.get('/', async (req, res) => {
       blogPost.get({ plain: true })
     );
 
-    res.render('homepage', {
+    res.render("homepage", {
       blogPosts,
       loggedIn: req.session.loggedIn,
     });
@@ -31,51 +31,83 @@ router.get('/', async (req, res) => {
 });
 
 // GET one blog
-router.get('/blogpost/:id', withAuth, async (req, res) => {
-    try {
-      const dbBlogPostData = await BlogPost.findByPk(req.params.id, {
-        include: [
-          {
-            model: User,
-            attributes: {
-              exclude: ['password']
-            }
+router.get("/blogpost/:id", withAuth, async (req, res) => {
+  try {
+    const dbBlogPostData = await BlogPost.findByPk(req.params.id, {
+      include: [
+        {
+          model: User,
+          attributes: {
+            exclude: ["password"],
           },
-        ],
-      });
-      const blogPost = dbBlogPostData.get({ plain: true });
+        },
+        { model: Comment,
+        include: [{
+          model: User,
+          attributes: ['username']
+        }] },
+      ],
+    });
+    const blogPost = dbBlogPostData.get({ plain: true });
 
-      console.log(blogPost);
+    res.render("blogpost", { blogPost, loggedIn: req.session.loggedIn });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+});
 
-      res.render('blogpost', { blogPost, loggedIn: req.session.loggedIn });
-    } catch (err) {
-      console.log(err);
-      res.status(500).json(err);
-    }
-  });
+router.get("/blogpost/:id/addcomment", withAuth, async (req, res) => {
+  const blogPostId = req.params.id;
+  res.render("addcomment", { blogPostId, loggedIn: req.session.loggedIn });
+});
 
-// // GET one painting
-// router.get('/painting/:id', withAuth async (req, res) => {
-//     try {
-//       const dbPaintingData = await Painting.findByPk(req.params.id);
+// create comment
+router.post("/blogpost/:id/addcomment", withAuth, async (req, res) => {
+  try {
+    const newComment = await Comment.create({
+      user_id: req.session.user_id,
+      blogpost_id: req.params.id,
+      content: req.body.content,
+    });
+    const dbBlogPostData = await BlogPost.findByPk(req.params.id, {
+      include: [
+        {
+          model: User,
+          attributes: {
+            exclude: ["password"],
+          },
+        },
+        {
+          model: Comment,
+          include: [
+            {
+              model: User,
+              attributes: ["username"],
+            },
+          ],
+        },
+      ],
+    });
 
-//       const painting = dbPaintingData.get({ plain: true });
+    const blogPost = dbBlogPostData.get({ plain: true });
 
-//       res.render('painting', { painting, loggedIn: req.session.loggedIn });
-//     } catch (err) {
-//       console.log(err);
-//       res.status(500).json(err);
-//     }
-//   }
-// });
+    console.log(blogPost);
 
-router.get('/login', (req, res) => {
+    res.render("blogpost", { blogPost, loggedIn: req.session.loggedIn });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+});
+
+router.get("/login", (req, res) => {
   if (req.session.loggedIn) {
-    res.redirect('/');
+    res.redirect("/");
     return;
   }
 
-  res.render('login');
+  res.render("login");
 });
 
 module.exports = router;
