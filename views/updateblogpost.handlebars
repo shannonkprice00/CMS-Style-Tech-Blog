@@ -1,13 +1,24 @@
-<div class="card">
-  <div class="form-floating m-3">
-    <input type="text" class="form-control" id="update-blogpost-title" placeholder="" value="{{blogPost.title}}">
-    <label for="floatingInput">BlogPost Title</label>
-  </div>
+<div class="container">
+  <div class="card">
     <div class="form-floating m-3">
-      <textarea class="form-control" id="update-blogpost-content" name="content" style="height: 200px">{{ blogPost.content }}</textarea>
+      <input type="text" class="form-control" id="update-blogpost-title" placeholder="" value="{{blogPost.title}}">
+      <label for="floatingInput">BlogPost Title</label>
+    </div>
+    <div class="form-floating m-3">
+      <textarea class="form-control" id="update-blogpost-content" name="content"
+        style="height: 200px">{{ blogPost.content }}</textarea>
       <label for="floatingTextarea2">BlogPost Content</label>
     </div>
+  </div>
+  <div class="row d-flex justify-content-space-between" style="width: 100%">
+    <button class="btn btn-primary mb-3 mx-3" id="update-blogpost" style="width: 8%; padding: 3px;"
+      type="submit">Update</button>
+    <button class="btn btn-primary mb-3 mx-3" id="delete-blogpost" style="width: 8%; padding: 3px;"
+      type="submit">Delete</button>
+  </div>
 </div>
-    <button class="btn btn-primary mb-3 mx-3" id="update-blogpost" style="width: 8%; padding: 3px;" type="submit">Update</button>
-</div>
+
+
+
 <script src="/js/updateblogpost.js"></script>
+<script src="/js/deleteblogpost.js"></script>
