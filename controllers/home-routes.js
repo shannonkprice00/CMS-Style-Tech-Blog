@@ -119,6 +119,51 @@ router.post("/dashboard/addblogpost", withAuth, async (req, res) => {
    }
   });
 
+  router.get("/dashboard/updateblogpost/:id", withAuth, async (req, res) => {
+    try {
+      const dbBlogPostData = await BlogPost.findByPk(req.params.id, {
+        include: [
+          {
+            model: User,
+            attributes: {
+              exclude: ["password"],
+            },
+          },
+          { model: Comment,
+          include: [{
+            model: User,
+            attributes: ['username']
+          }] },
+        ],
+      });
+      const blogPost = dbBlogPostData.get({ plain: true });
+      res.render("updateblogpost", { blogPost, loggedIn: req.session.loggedIn });
+    } catch (err) {
+      console.log(err);
+      res.status(500).json(err);
+    }
+  })
+
+  router.put("/dashboard/updateblogpost/:id", withAuth, async (req, res) => {
+    try {
+      const dbBlogPostData = await BlogPost.update(req.body, {
+        where: {
+          id: req.params.id,
+        },
+      });
+  
+      if(!dbBlogPostData[0]) {
+        res.status(404).json({message: 'No user with this id!'});
+        return;
+      }
+   
+      res.render("blogpost", { dbBlogPostData, loggedIn: req.session.loggedIn });
+    } catch (err) {
+      console.log(err);
+      res.status(500).json(err);
+    }
+  })
+
 router.get("/blogpost/:id/addcomment", withAuth, async (req, res) => {
   const blogPostId = req.params.id;
   res.render("addcomment", { blogPostId, loggedIn: req.session.loggedIn });
