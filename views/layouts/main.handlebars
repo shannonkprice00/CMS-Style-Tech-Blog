@@ -19,7 +19,7 @@
 <body>
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">Blog Site</a>
+    <a class="navbar-brand">Developer's Blog Site</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -42,7 +42,7 @@
         {{/if}}
       </ul>
       <span class="navbar-text">
-        My Super Awesome Blog Site!
+        Convenience.  Storage.  Ideas.
       </span>
     </div>
   </div>
@@ -52,9 +52,15 @@
     {{{body}}}
     </div>
 </main>
+<footer style="border-top: 1px solid black; background-color: gray;">
+  <div class="text-center">
+    <h6>some text here</h6>
+    <p>some text here</p>
+  </div>
+</footer>
   {{#if loggedIn}}
   <script src="/js/logout.js"></script>
-  {{/if}}
+  {{/if}}  
 </body>
 
 </html>

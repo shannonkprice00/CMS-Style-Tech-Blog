@@ -219,8 +219,7 @@ router.post("/dashboard/addblogpost", withAuth, async (req, res) => {
         res.status(404).json({ message: 'No blogpost found with this id!' });
         return;
       }
-
-      // res.render("/dashboard", { dbBlogPostData, loggedIn: req.session.loggedIn });
+      
       res.status(200).json(dbBlogPostData);
     } catch (err) {
       console.log(err);
@@ -236,5 +235,21 @@ router.get("/login", (req, res) => {
 
   res.render("login");
 });
+
+router.get("/signup", (req, res) => {
+  if (req.session.loggedIn) {
+    res.redirect("/");
+    return;
+  }
+  res.render("signup");
+});
+
+router.get("/loginorsignup", (req, res) => {
+  if (req.session.loggedIn) {
+    res.redirect("/");
+    return;
+  }
+  res.render("loginorsignup");
+})
 
 module.exports = router;
