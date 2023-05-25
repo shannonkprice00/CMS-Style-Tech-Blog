@@ -244,12 +244,12 @@ router.get("/signup", (req, res) => {
   res.render("signup");
 });
 
-router.get("/loginorsignup", (req, res) => {
+router.get("/login-or-signup", (req, res) => {
   if (req.session.loggedIn) {
     res.redirect("/");
     return;
   }
-  res.render("loginorsignup");
+  res.render("login-or-signup");
 })
 
 module.exports = router;

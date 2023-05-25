@@ -1,8 +1,18 @@
-<div class="card" id="add-comment" style="width: 50rem">
-    <div class="mb-3">
-        <input type="text" class="form-control" id="comment-content" placeholder="Write comment here...">
+<div class="d-flex justify-content-center align-items-center vh-100">
+    <div class="align-self-center" id="add-comment" style="width: 50rem; min-width: fit-content;">
+        <div class="card">
+        <div class="card-header mb-0">
+            <a class="card-title">Add a Comment</a>
+        </div>
+        <div class="card-body p-3 mb-3">
+            <input type="text" class="form-control my-3" id="comment-content" placeholder="Write comment here...">
+            <button class="btn btn-primary mt-3" id="add-comment" style="width:min-content; padding: .5rem;"
+            type="submit">Submit</button>
+        </div>
+        </div>
     </div>
-    <button class="btn btn-primary" id="add-comment" style="width: 12%; padding: 8px;" type="submit">Submit</button>
 </div>
+
+
 
 <script src="/js/addcomment.js"></script>

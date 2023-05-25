@@ -1,7 +1,10 @@
-<div class="card w-25 mb-3">
-  <div class="card-body">
+<div class="card w-25 mb-3" style="min-width:fit-content;">
+  <div class="card-header mb-0">
     <h2 id="blog-title" class="card-title">{{title}}</h2>
+  </div>
+  <div class="card-body">
     <p class="card-text">Created On: {{format_date date_posted}}</p>
   </div>
-  <a href="/dashboard/updateblogpost/{{id}}" class="btn btn-primary mb-3 mx-3" id="edit-post-button" style="width: 50%; padding: 3px;" type="submit">Edit Post</a>
+  <a href="/dashboard/updateblogpost/{{id}}" class="btn btn-primary mb-3 mx-3" id="edit-post-button"
+    style="width: 50%; padding: 3px;" type="submit">Edit Post</a>
 </div>

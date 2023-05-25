@@ -1,37 +1,47 @@
 .login-card {
- margin: 1rem;
- padding: 1rem;
- border: 1px solid black;
- border-radius: 10px;
- width: 50rem;
+  margin: 1rem;
+  padding: 1rem;
+  border: 1px solid black;
+  border-radius: 10px;
+  width: 50rem;
 }
 
 .card {
-    margin: 2rem;
-
+  margin: 2rem;
 }
 
 .card-title {
-    font-size: 1.2rem;
+  font-size: 1.2rem;
 }
 
-a .card-title:hover {
-    cursor: pointer;
+.on-hover:hover {
+  cursor: pointer;
+  color: gray;
 }
 
 .card-subtitle {
-    font-size: 1rem;
+  font-size: 1rem;
 }
 
 .card-text {
-    font-size: .8rem;
+  font-size: 0.8rem;
 }
 
 .separator {
-    padding: 3%;
-    font-size: 2rem;
+  padding: 3%;
+  font-size: 2rem;
+}
+
+.custom-label {
+  font-size: 1.3rem;
+}
+
+.footer {
+    line-height: .3rem;
+    padding-top: 1rem;
+    font-size: .7rem;
 }
 
 #add-comment {
-    padding: 1rem;
+  padding: 1rem;
 }

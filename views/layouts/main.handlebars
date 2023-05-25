@@ -48,14 +48,14 @@
   </div>
 </nav>
 <main>
-    <div class="container-fluid">
+    <div class="container-fluid" style="min-height: 100vh;">
     {{{body}}}
     </div>
 </main>
 <footer style="border-top: 1px solid black; background-color: gray;">
-  <div class="text-center">
-    <h6>some text here</h6>
-    <p>some text here</p>
+  <div class="d-flex flex-column text-center justify-content-center align-items-center footer" style="height: 100%;">
+    <p>Full-Stack CMS-style Blog Site Application</p>
+    <p>Created with JavaScript, Bootstrap CSS, & Handlebars.js HTML Templates</p>
   </div>
 </footer>
   {{#if loggedIn}}

@@ -1,16 +1,21 @@
-<div class="login-card">
-    <h2 class="page-title" style="font-size: 1.5rem">Login</h2>
-    <form class="login-form">
-        <div class="mb-3">
-            <label for="email-login" class="form-label" style="font-size: .75rem">Email:</label>
-            <input type="email" class="form-control" id="email-login" aria-describedby="emailHelp">
+<div class="d-flex justify-content-center vh-100">
+    <div class="card align-self-center" style="width: 45%; height:fit-content; min-width:fit-content;">
+        <div class="card-header mb-0">
+            <h2 class="card-title" style="font-size: 1.5rem">Login</h2>
         </div>
-        <div class="mb-3">
-            <label for="password-login" class="form-label" style="font-size: .75rem">Password:</label>
-            <input type="password" class="form-control" id="password-login">
-        </div>
-        <button type="submit" class="btn btn-primary" style="font-size: 0.5rem padding: 0.25rem 1rem">Login</button>
-    </form>
+        <form class="login-form p-4">
+            <div class="mb-3">
+                <label for="email-login" class="form-label" style="font-size: .75rem">Email:</label>
+                <input type="email" class="form-control" id="email-login" aria-describedby="emailHelp">
+            </div>
+            <div class="mb-3">
+                <label for="password-login" class="form-label" style="font-size: .75rem">Password:</label>
+                <input type="password" class="form-control" id="password-login">
+            </div>
+            <button type="submit" class="btn btn-primary mb-3" style="font-size: 0.5rem padding: 0.25rem 1rem">Login</button>
+        </form>
+    </div>
 </div>
+
 
 <script src="./js/login.js"></script>
