@@ -13,13 +13,10 @@ This application is a CMS-style blog site where developers can publish their blo
 - [Questions](#questions)
 
 ## Installation
-To use this project, you will need to add the database name, MySQL username, and MySQL password to an environment variable file.<br>
-<br> <img src="./public/images/screenshot1.png" style="border: 1px solid blue;" width=45% /> <br><br>
-Next, you will need to enter schema commands by entering the following commands from the root directory in the terminal: <br> `$ mysql -u root -p` <br> Type in your password if you have one <br> `$ source ./db/schema.sql;`<br>
-To quit the MySQL shell you can type "quit". <br>You will also need to install any dependencies using the following command in the terminal: <br>`$ npm i`
+N/A
 
 ## Usage
-To run the program, use the following command from the root directory in the terminal:<br> `$ node server.js`<br> OR <br> `$ npm start` <br> 
+To open the application in your browser, click [here](https://young-caverns-47647.herokuapp.com/). The user will be able to view any existing blog post titles and the dates they were created on the homepage but will be prompted to either sign up or login to see any more. <br> <br> <img src="./public/images/screenshot2.png" style="border: 1px solid blue;" width=100% /> <br> <br> Once logged in, the user can click on any blog title to view the post and any comments. <br> <br> <img src="./public/images/screenshot3.png" style="border: 1px solid blue;" width=100% /> <br> <br> The user can access the navbar to navigate to the dashboard where the user can write a new blogpost or update/delete any of their existing blogposts by clicking on the edit post button. <br> <br> <img src="./public/images/screenshot4.png" style="border: 1px solid blue;" width=100% /> <br> <br> When finished using the site, the user may manually logout using the navbar logout link or the site will automatically log the user out after one hour. 
 
 ## Credits
 Tutorials Followed: <br>
